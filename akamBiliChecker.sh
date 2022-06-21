@@ -26,8 +26,8 @@ done
 [[ -n $ip_list ]] && ip_arr=($ip_list) && num=${#ip_arr[@]}
 [[ -z $ip_list ]] && ip_arr="" && num=1
 
-[[ -n $proxy ]] && url=$(ykdl -J --proxy $proxy https://www.bilibili.com/video/BV1ss411h7t4 |  jq -r '.streams.BD.src[0]')
-[[ -z $proxy ]] && url=$(ykdl -J https://www.bilibili.com/video/BV1ss411h7t4 |  jq -r '.streams.BD.src[0]')
+[[ -n $proxy ]] && url=$(ykdl -J --proxy $proxy https://www.bilibili.com/video/BV16M4y1V7tT |  jq -r '.streams."BD-80".src[0]')
+[[ -z $proxy ]] && url=$(ykdl -J https://www.bilibili.com/video/BV16M4y1V7tT |  jq -r '.streams."BD-80".src[0]')
 [[ -z $url ]] && echo "ERROR: PLS check your ydkl, exit ..." && exit 0
 domain=$(echo $url | awk -F[/:] '{print $4}')
 [[ ! $url =~ $domain_name ]] && echo -e "ERROR: There is NO 'upos-hz-mirrorakam.akamaized.net' found in the url extracted by YKDL, pls check your PROXY settings or YKDL installation, the URL is \n>>> $url" && exit 0
