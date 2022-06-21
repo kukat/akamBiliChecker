@@ -49,6 +49,26 @@ Mac OS 上建议安装 `gnu` 系列命令，如使用Mac OS原装的BSD sed和aw
 由于可能会过期失效，请用户自行重新解析整理成可用 IP 列表。
 由于 whatsmydns 解析IP不是太全，因此放弃了自动获取 IP 列表的作法，请用户自行去获取 IP 列表，并制作成列表文件进行测试，或者使用本作携带的几个 IP 列表。
 
+### 手动获取IP, 去对应的网页上执行查询操作，然后打开浏览器控制台(F12), 执行下面脚本提取IP
+
+#### 17ce.com
+
+```
+[...document.querySelectorAll('font[color]>a')].map(r => r.innerText).join(',')
+```
+
+#### whatsmydns.net
+
+```
+[...document.querySelectorAll('code.result')].map(r => r.innerHTML.replaceAll('<br>', ',')).filter(n => n).join(",")
+```
+
+#### dnschecker.org
+
+```
+[...document.querySelectorAll(‘td.result’)].map(r => r.innerText.replaceAll(‘\n’, ‘,’)).filter(n => n).join(“,”)
+```
+
 ## 使用
 
 1. 无参数直接执行命令，测试本机目前配置 IP：
